@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Spin The Wheel Demo</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      #wheel-container {
+        margin: 20px;
+      }
+      button {
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wheel-container"></div>
+    <button id="spin-random">Random Spin</button>
+    <button id="spin-index-2">Spin to Index 2 (Slow)</button>
+    <button id="spin-index-5">Spin to Index 5 (Fast)</button>
+    <button id="reset-btn">Reset</button>
+    <button id="stop-btn">Stop</button>
+    <button id="toggle-interact">Toggle Interactivity</button>
+
+    <script type="module">
+      import SpinTheWheel from "../dist/oho-spin.esm.js";
+
+      const wheel = new SpinTheWheel({
+        container: "#wheel-container",
+        quadrants: [
+          {
+            image: "https://picsum.photos/40/40?random=1",
+            text: "Prize 1",
+            textColor: "#AD0029",
+            fontStyle: "bold 20px Comic Sans MS",
+            color: "#ff9999",
+            weight: 1,
+            value: '34823849'
+          },
+          {
+            image: "https://picsum.photos/40/40?random=2",
+            text: "Prize 2 with Long Text",
+            textColor: "#AD0029",
+            fontSize: 18,
+            color: "#99ccff",
+            weight: 2,
+          },
+          {
+            image: "https://picsum.photos/40/40?random=3",
+            text: "Prize 3",
+            textColor: "#AD0029",
+            fontStyle: "italic 16px Georgia",
+            color: "#99ff99",
+            weight: 1,
+            value: '34823849'
+          },
+          {
+            image: "https://picsum.photos/40/40?random=4",
+            text: "Prize 4 Super Long Text",
+            textColor: "#AD0029",
+            fontSize: 14,
+            color: "#ffcc99",
+            weight: 3,
+          },
+          {
+            image: "https://picsum.photos/40/40?random=5",
+            text: "Prize 5",
+            textColor: "#AD0029",
+            fontStyle: "600 20px Roboto",
+            color: "#cc99ff",
+            weight: 3,
+          },
+          {
+            image: "https://picsum.photos/40/40?random=6",
+            text: "Prize 6 with Extra Words",
+            textColor: "#AD0029",
+            fontSize: 16,
+            color: "#ffff99",
+            weight: 3,
+          },
+          {
+            image: "https://picsum.photos/40/40?random=7",
+            text: "Prize 7",
+            textColor: "#AD0029",
+            fontStyle: "bold 18px Times New Roman",
+            color: "#99ffcc",
+            weight: 3,
+          },
+          {
+            image: "https://picsum.photos/40/40?random=8",
+            text: "Prize 8 Long Text Here",
+            textColor: "#AD0029",
+            fontSize: 15,
+            color: "#ff99cc",
+            weight: 3,
+          },
+        ],
+        spinDuration: 10000,
+        soundEnabled: true,
+        soundFile: "/assets/spin-sound.mp3",
+        pointerAngle: 0,
+        isInteractive: false,
+        easing: "cubicOut",
+        overlayImage: "/assets/spin-wheel-overlay.svg",
+        resultPosition: "top", // Set your desired position here
+        is3D: true,
+        onSpinComplete: (result) =>{
+          console.log(result)
+          alert(`You won: ${result.text}!`)},
+      });
+
+      
+
+      document
+        .getElementById("spin-random")
+        .addEventListener("click", () => wheel.spin());
+      document
+        .getElementById("spin-index-2")
+        .addEventListener("click", () => wheel.spinToIndex(2, 0.5)); // Index 2, slow speed
+      document
+        .getElementById("spin-index-5")
+        .addEventListener("click", () => wheel.spinToIndex(5, 2)); // Index 5, fast speed
+      document
+        .getElementById("reset-btn")
+        .addEventListener("click", () => wheel.reset());
+      document
+        .getElementById("stop-btn")
+        .addEventListener("click", () => wheel.stopSpin());
+      document
+        .getElementById("toggle-interact")
+        .addEventListener("click", () =>
+          wheel.toggleInteractivity(!wheel["config"].isInteractive)
+        );
+    </script>
+  </body>
+</html>
